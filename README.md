@@ -1,3 +1,9 @@
+<p align="center">
+  <a href="https://ridhii17.github.io/AI---Image---Generator/" target="_blank">
+    <img src="https://img.shields.io/badge/🚀 Live Demo-Click Here-blue?style=for-the-badge" alt="Live Demo"/>
+  </a>
+</p>
+
 # 🎨 AI Image Generator
 
 An AI-powered image generator web app built with **HTML, CSS, and JavaScript**.  
