@@ -1,0 +1,397 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+/* :root {
+    --primary-color: #2356FF;
+    --secondary-color: #7657FF;
+    --light-secondary-color: #8DA7FC;
+    --gray-bg-color: #F9F9F9;
+    --gray-border-color: #DDDDDD;
+} */
+
+:root {
+  --primary-color: #0077b6;
+  --secondary-color: #00b4d8;
+  --light-secondary-color: #90e0ef;
+  --gray-bg-color: #caf0f838;
+  --gray-border-color: #bfd7ea;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  width: 100%;
+  height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(to right, #f2f5ff, #e8e2ff);
+}
+
+/* START THE CODE BELOW */
+
+.container {
+  background: white;
+  padding: 25px;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  width: 90%;
+  max-width: 700px;
+}
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Pushes toggle to the right */
+  gap: 18px;
+  position: relative;
+}
+.title__icon {
+  background: linear-gradient(
+    to right,
+    var(--primary-color),
+    var(--secondary-color)
+  );
+  fill: white;
+  width: 45px;
+  height: 45px;
+  padding: 8px;
+  border-radius: 12px;
+  box-shadow: 0px 2px 10px var(--light-secondary-color);
+}
+.title__text {
+  background: linear-gradient(
+    to right,
+    var(--primary-color),
+    var(--secondary-color)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: bold;
+}
+.form-and-image {
+  display: flex;
+  margin-top: 24px;
+  gap: 32px;
+}
+.form-container {
+  /* border: solid blue; */
+  width: 100%;
+}
+
+.form-container__prompt-input {
+  resize: none;
+  width: 100%;
+  padding: 8px 10px;
+  border: solid 1.5px var(--gray-border-color);
+  background: var(--gray-bg-color);
+  border-radius: 8px;
+  transition: 150ms ease-in;
+  outline: solid 3px transparent;
+}
+
+.form-container__prompt-input:focus {
+  outline: solid 3px var(--light-secondary-color);
+}
+.form-container__dropdown-group {
+  margin-top: 8px;
+  display: flex;
+  gap: 12px;
+}
+.form-container__dropdown {
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: solid 2px var(--gray-border-color);
+  outline: solid 3px transparent;
+  background: var(--gray-bg-color);
+  transition: 300ms ease;
+}
+.form-container__dropdown:focus {
+  outline: solid 3px var(--light-secondary-color);
+}
+.form-container__button {
+  margin-top: 25px;
+  background: linear-gradient(
+    to right,
+    var(--primary-color),
+    var(--secondary-color)
+  );
+  padding: 8px 12px;
+  fill: white;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: 150ms ease;
+  outline: solid 3px transparent;
+}
+.form-container__button:focus {
+  outline: solid 3px var(--light-secondary-color);
+}
+.form-container__button:hover {
+  box-shadow: 2px 4px 20px var(--light-secondary-color);
+}
+.image-container {
+  aspect-ratio: 1/1;
+  width: 65%;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  position: relative;
+}
+.image-container:hover .image-container__image-result {
+  transform: scale(1.05);
+}
+.image-container:hover .image-container__layer {
+  opacity: 1;
+}
+.image-container:hover .image-container__download-button {
+  opacity: 1;
+  bottom: 15px;
+}
+.image-container__image-result {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: 300ms ease;
+}
+.image-container__layer {
+  opacity: 0;
+  position: absolute;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+  width: 100%;
+  height: 30%;
+  bottom: 0;
+  transition: 300ms ease;
+}
+.image-container__download-button {
+  opacity: 0;
+  position: absolute;
+  right: 15px;
+  bottom: 0px;
+  width: 45px;
+  height: 45px;
+  border-radius: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: rgba(255, 255, 255, 0.25);
+  fill: white;
+  cursor: pointer;
+  transition: 500ms ease;
+}
+.image-container__loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  justify-content: center;
+}
+.image-container__loading-spinner {
+  width: 70px;
+  height: 70px;
+}
+.image-container__loading-text {
+  font-size: 14px;
+  margin-top: 8px;
+}
+.image-container.loading {
+  box-shadow: none;
+  background: var(--gray-bg-color);
+}
+.image-container.loading .image-container__layer,
+.image-container.loading .image-container__download-button {
+  display: none;
+}
+
+/* Dark mode toggle button styles */
+.dark-mode-toggle {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: rem;
+  padding: 0.2em 0.5em;
+  display: flex;
+  align-items: center;
+  transition: color 0.2s;
+  margin-left: auto; /* Pushes the button to the far right */
+  border-radius: 50%;
+  position: relative;
+  overflow: visible;
+}
+
+.dark-mode-toggle box-icon {
+  color: #2356ff;
+  transition: color 0.2s;
+  z-index: 2;
+  position: relative;
+}
+
+/* Circle effect on hover */
+.dark-mode-toggle::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 38px;
+  height: 38px;
+  background: linear-gradient(135deg, #e8e2ff 0%, #0d4c6122 100%);
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(0.7);
+  opacity: 0;
+  transition: opacity 0.25s, transform 0.25s;
+  z-index: 2;
+}
+
+.dark-mode-toggle:hover::before {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1.1);
+  box-shadow: 0 4px 16px 0 #2356ff33;
+}
+
+.dark-mode-toggle:hover box-icon {
+  color: #fff;
+}
+
+.dark-mode .dark-mode-toggle box-icon {
+  color: white;
+}
+
+/* Dark mode main styles */
+.dark-mode {
+  background: #181a1b !important;
+  color: #f1f1f1 !important;
+}
+
+.dark-mode .container {
+  background: #23272a !important;
+  color: #f1f1f1 !important;
+}
+
+.dark-mode .form-container__prompt-input,
+.dark-mode .form-container__dropdown,
+.dark-mode .image-container {
+  background: #23272a !important;
+  color: #f1f1f1 !important;
+  border-color: #444 !important;
+}
+
+.dark-mode .form-container__button,
+.dark-mode .image-container__download-button {
+  background: #254cca !important;
+  color: #fff !important;
+}
+
+.dark-mode .form-container__button:hover {
+  box-shadow: 2px 4px 20px #107cf0 !important;
+}
+
+.dark-mode .image-container__layer {
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.85),
+    rgba(0, 0, 0, 0)
+  ) !important;
+}
+
+.prompt-input-wrapper {
+  position: relative;
+  width: 100%;
+  display: flex;
+}
+
+.form-container__prompt-input {
+  width: 100%;
+  resize: vertical;
+  min-height: 80px;
+  padding-right: 48px; /* space for the button */
+}
+
+.suggest-prompt-btn {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  background: linear-gradient(135deg, #e8e2ff 0%, #3857bc22 100%);
+  border: none;
+  border-radius: 50%;
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 8px #2356ff22;
+  transition: background 0.2s, box-shadow 0.2s;
+  z-index: 2;
+  font-size: 1.3rem;
+}
+
+.suggest-prompt-btn box-icon {
+  color: #2246bd;
+  font-size: 1.5rem;
+}
+
+.suggest-prompt-btn:hover {
+  background: linear-gradient(135deg, #cbced7 0%, #f1e7ac 100%);
+  box-shadow: 0 4px 16px #2356ff44;
+}
+
+.suggest-prompt-btn:hover box-icon {
+  color: #fff;
+}
+
+.dark-mode .suggest-prompt-btn {
+  background: linear-gradient(135deg, #3aa2f1 0%, #efba66 100%);
+  box-shadow: 0 2px 8px #0008;
+}
+
+.dark-mode .suggest-prompt-btn box-icon {
+  color: #fff;
+}
+
+/* Example: if you add a .dark-mode class to the body when dark mode is active */
+body.dark-mode #darkModeToggle {
+  background: #fff;
+  color: #222;
+  border-radius: 50%;
+  width: 42px;
+  height: 42px;
+  min-width: 42px;
+  min-height: 42px;
+  max-width: 42px;
+  max-height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    overflow-y: scroll;
+    max-height: 90%;
+  }
+  .image-container {
+    width: 100%;
+  }
+  .form-and-image {
+    flex-direction: column;
+  }
+  .image-container__download-button {
+    margin: 10px;
+    transform: scale(1.1);
+  }
+}
